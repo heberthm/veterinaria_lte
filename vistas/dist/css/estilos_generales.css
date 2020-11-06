@@ -1,0 +1,231 @@
+ 
+ /*=============================================
+=        ESTILOS PARA SELECT2 AUTOCOMPLETE
+=============================================*/
+
+
+.select2,
+.select2-search__field,
+.select2-results__option
+{
+    font-size:1.2em!important;
+}
+.select2-selection__rendered {
+    line-height: 2em !important;
+}
+.select2-container .select2-selection--single {
+    height: 2em !important;
+}
+.select2-selection__arrow {
+    height: 2em !important;
+}
+
+</style
+
+ /*=============================================
+=      FIN ESTILOS PARA SELECT2 AUTOCOMPLETE
+=============================================*/
+
+
+/*=============================================
+=      ESTILOS PARA BOX-BODY NOTIFICACIONES
+=============================================*/
+
+.box-body .notificaciones{
+  
+ height: 600px; overflow-y: scroll;
+}
+
+
+/*=============================================
+=      FIN ESTILOS PARA BOX-BODY NOTIFICACIONES
+=============================================*/
+
+
+
+
+ /*=============================================
+=            ESTILOS PARA VENTANA MODAL             
+=============================================*/
+
+
+.modal-backdrop.fade.in {
+background: rgba(0, 0, 0, 0.85) !important;
+background-color:transparent; transition: all .2s;  z-index: auto;}
+
+
+.mostrar_imagen{
+  position: relative;
+  margin-top:-45px;
+  margin-left:385px;
+  width:40px;
+  height:50px;
+  border: double;
+  border:solid;
+  border:4px;
+  
+  }
+
+
+.mostrar_mensaje{
+    position: absolute;
+    margin-top:-30px;
+    margin-left:320px;
+
+    color:red; 
+    font-size: 18px;
+    font-style: bold;
+    z-index: 9;
+
+}
+
+
+.vertical-menu {
+  width: 200px;
+}
+
+.vertical-menu a {
+  background-color: #eee;
+  color: primaty;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc;
+}
+
+.vertical-menu a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+
+#imagePreview  {
+  
+  margin-left: 35px;
+  top: 0px;
+  padding-left:-15px;
+}
+ 
+
+.image-preview-input {
+    position: relative;
+    overflow: hidden;
+    margin: 0px;    
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;    
+}
+.image-preview-input input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+ 
+#carga_gif {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url(../images/loader.gif) center no-repeat #fff;
+} 
+
+
+.image-preview-input {
+    position: relative;
+    overflow: hidden;
+    margin: 0px;    
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;    
+}
+.image-preview-input input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+
+
+@media only screen and (min-width: 992px) {
+ 
+.modal-dialog{
+    position: relative;
+    display: table; /* This is important */ 
+    overflow-y: auto;    
+    overflow-x: auto;
+    width: auto;
+    height: auto;
+    
+  }
+
+@media only screen and (min-width: 480px) {
+
+.modal-body{
+   height: 500px;
+   width: 960px;
+
+  
+}
+
+ 
+.modal-dialog{
+    position: relative;
+    display: table; /* This is important */ 
+    overflow-y: auto;    
+    overflow-x: auto;
+    width: auto;
+    height: auto;
+    
+  }
+
+}
+
+</style>
+
+ /*=============================================
+=          FIN DE ESTILOS VENTANA MODAL 
+=============================================*/
+
