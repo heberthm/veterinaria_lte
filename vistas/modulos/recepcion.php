@@ -2827,6 +2827,23 @@ FULLCALENDAR LIST
 
 
 
+<script type="text/javascript">
+  
+toastr.options = {
+    newestOnTop      : true,
+    closeButton      : false,
+    progressBar      : true,
+    preventDuplicates: false,
+    showMethod       : 'slideDown',
+    timeOut          : 10000, //default timeout,
+};
+  
+</script>
+
+
+
+
+
 
 
 <!-- ==============================================
