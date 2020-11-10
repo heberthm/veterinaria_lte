@@ -657,7 +657,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                   <div class="form-group"> 
             <div class="col-sm-offset-2 col-sm-10">
               <div class="checkbox">
-              <label class="text-danger"><input type="checkbox"  name="delete"> Borrar cita</label>
+              <label class="text-danger" style="color:#060606; background:#F1B8A4;" ><input type="checkbox"  name="delete"> Eliminar cita</label>
               </div>
             </div>
           </div>
@@ -2558,6 +2558,8 @@ EDITAR DATOS DE FULLCALENDAR
 
 ==============================================  -->
 
+<!--
+
         <script type="text/javascript">
             $(document).ready(function() {
                
@@ -2571,14 +2573,16 @@ EDITAR DATOS DE FULLCALENDAR
                         dataType: "json",
                         success: function(data) {
 
+                              $('#calendar').fullCalendar('refetchEvents');
+                              $('#fullCalModal').fullCalendar('refetchEvents');
+
                              // $('#agregar').attr('disabled', true);
                               $('#editar_calendario')[0].reset();
                               $('#ModalEdit').modal('hide');
                               $('#agenda_modal').modal('hide');
                               toastr["success"]("los datos se han guardado correctamente", "Información");
 
-                              $('#calendar').fullCalendar('refetchEvents');
-                              $('#fullCalModal').fullCalendar('refetchEvents');
+                           
                             
 
                             // $("#fullCalModal").fullCalendar('addEventSource', JSON, true); 
@@ -2600,7 +2604,7 @@ EDITAR DATOS DE FULLCALENDAR
              });    
         </script>
 
-
+-->
 
 
 
@@ -2640,14 +2644,14 @@ FULLCALENDAR LIST
 =========================================  -->
 
            
-    <script type="text/javascript">
+<script type="text/javascript">
 
-          $(function() {
-          $('#calendar').fullCalendar({
+ $(function() {
+      
+        var calendar1 = $('#calendar').fullCalendar({
 
 
-           
-           
+                     
                        
            loading: function( isLoading, view ) {
                     if (isLoading) {
@@ -2688,36 +2692,83 @@ FULLCALENDAR LIST
              
              
 
-               events: 'modelos/eventos_calendario.php?view=1',
-                        
-              
+       events: 'modelos/eventos_calendario.php?view=1',
+                    
+            
 
+    
+      eventClick: function(event) {
 
+          $('#ModalEdit #id').val(event.id);
+          $('#ModalEdit #fecha').val(event.fecha);
+          $('#ModalEdit #cliente').val(event.cliente);
+          $('#ModalEdit #mascota').val(event.mascota);
+          $('#ModalEdit #especie').val(event.especie);
+          $('#ModalEdit #telefono').val(event.telefono);
+          $('#ModalEdit #CboMedico').val(event.medico);
+          $('#ModalEdit #descripcion').val(event.descripcion);
+          $('#ModalEdit #title').val(event.title);
+          $('#ModalEdit #title').val(event.title);
+          $('#ModalEdit #hora_ini').val(event.hora_ini);
+          $('#ModalEdit #hora_fin').val(event.hora_fin);
+          $('#ModalEdit #start').val(event.start);
+          $('#ModalEdit #end').val(event.end);
+          $('#ModalEdit #color').val(event.color);
          
-      eventClick: function(calEvent, jsEvent, view) {
-          $('#ModalEdit #id').val(calEvent.id);
-          $('#ModalEdit #fecha').val(calEvent.fecha);
-          $('#ModalEdit #cliente').val(calEvent.cliente);
-          $('#ModalEdit #mascota').val(calEvent.mascota);
-          $('#ModalEdit #especie').val(calEvent.especie);
-          $('#ModalEdit #telefono').val(calEvent.telefono);
-          $('#ModalEdit #CboMedico').val(calEvent.medico);
-          $('#ModalEdit #descripcion').val(calEvent.descripcion);
-          $('#ModalEdit #title').val(calEvent.title);
-          $('#ModalEdit #title').val(calEvent.title);
-          $('#ModalEdit #hora_ini').val(calEvent.hora_ini);
-          $('#ModalEdit #hora_fin').val(calEvent.hora_fin);
-          $('#ModalEdit #start').val(calEvent.start);
-          $('#ModalEdit #end').val(calEvent.end);
-          $('#ModalEdit #color').val(calEvent.color);
           $('#ModalEdit').modal('show');
-        },      
-                 
+     
+     
+        
 
-                 
+           $('#editar_calendario').off('submit').on('submit', function(e) {
 
+
+           
+
+              //Obtenemos datos formulario.
+              var data = $(this).serialize(); 
+              
+
+              //AJAX.
+              $.ajax({  
+                 type : 'POST',
+                 url: "vistas/plugins/calendar/editEventTitle.php",
+                 data:  data, 
+
+                 success:function(data) {  
+                   
+                          $('#agregar').attr('disabled', true);
+                            $('#editar_calendario')[0].reset();
+                            $('#ModalEdit').modal('hide');
+                            //$('#agenda_modal').modal('hide');
+
+
+                            $('#calendar').fullCalendar('refetchEvents');
+
+                            //  $('#fullCalModal').fullCalendar('render');
+                            $('#fullCalModal').fullCalendar('refetchEvents');
+
+                            toastr["success"]("los datos se han modificado correctamente", "Información");
+
+                 }  
+              });
+              return false;
+
+       
+          e.preventDefault();  
+        
+
+          
+     });
 
               
+ },
+
+
+    
+ 
+     
+                
               /*
               // filtrar eventos
                     if (mostrar_todo){
@@ -2738,13 +2789,15 @@ FULLCALENDAR LIST
 
                  */
 
-           
-   
+  
 
 
 
-                eventRender: function eventRender(eventObj, $el) {
-                
+            eventRender: function eventRender(eventObj, $el) {
+                      
+             
+
+
                 var request = new XMLHttpRequest();
                 request.open('GET', '', true);
                 request.onload = function () {
@@ -2764,19 +2817,25 @@ FULLCALENDAR LIST
                              eventObj.telefono + '<p>' + 'Asignado a: ' + eventObj.medico + '<p>' + 'Descripción: ' + eventObj.descripcion 
                                ,  
 
-
+                 
 
                   });
                 }
+
+             
+
               request.send();
              },
-                 
+            
+ 
+
+
+
+         
    });         
 
-
-       
-
-
+         
+ /*
     function edit(event){
       start = event.start.format('YYYY-MM-DD HH:mm');
       if(event.end){
@@ -2793,7 +2852,7 @@ FULLCALENDAR LIST
       Event[2] = end;
       
       $.ajax({
-       url: 'vistas/plugins/calendar/editEventDate.php',
+       url: 'vistas/plugins/calendar/editEventTitle.php',
        type: "POST",
        data: {Event:Event},
        success: function(rep, e) {
@@ -2817,7 +2876,7 @@ FULLCALENDAR LIST
       });
     }
      
-
+*/
                  
  });   
 
@@ -2830,14 +2889,11 @@ FULLCALENDAR LIST
 <script type="text/javascript">
   
 toastr.options = {
-    newestOnTop      : true,
-    closeButton      : false,
-    progressBar      : true,
-    preventDuplicates: false,
-    showMethod       : 'slideDown',
-    timeOut          : 10000, //default timeout,
+    
+    "positionClass": "toast-top-right",
+    timeOut  : 1800, //default timeout,
 };
-  
+
 </script>
 
 
@@ -2868,7 +2924,6 @@ VENTANA MODAL FULLCALENDAR
         },
 
 
-
         timezone: 'local',
 
         axisFormat: 'h:a',
@@ -2880,12 +2935,16 @@ VENTANA MODAL FULLCALENDAR
         selectable: true,
         selectHelper: true,
         allDaySlot: true,
+        nowIndicator: true,
 
 
         events: "../modelos/mostrar_eventos_fullcalendar.php",
 
 
         eventRender: function(event, element, view) {
+
+
+          
            
             if (event.allDay === 'true') {
            
@@ -2901,7 +2960,13 @@ VENTANA MODAL FULLCALENDAR
 
 
 
-       select: function(start, end) {
+
+
+
+/* AGREGAR EVENTO A CALENDARIO */
+
+
+   select: function(start, end) {
    
 
                 $('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm'));
@@ -2936,30 +3001,12 @@ VENTANA MODAL FULLCALENDAR
 
                             toastr["success"]("los datos se han guardado correctamente", "Información");
 
-
-
-
-                            //document.location.reload(); 
-
-
                         }
 
                     });
 
                 });
 
-
-
-                /*  $.ajax({
-                    url: 'add_events.php',
-                    data: 'start='+ satart+'&hora_ini='+ hora_ini +'&hora_fin='+ hora_fin,
-                    type: "POST",
-                    success: function(json) {
-                    alert('Added Successfully');
-                    }
-                  });
-
-                */
 
                 calendar.fullCalendar('renderEvent',
 
@@ -2979,6 +3026,11 @@ VENTANA MODAL FULLCALENDAR
         },
 
       editable: true,
+
+
+
+/* ACTIAULIZAR DATOS DE FECHA Y HORA */
+
 
       eventDrop: function(event, delta) {
        
@@ -3000,9 +3052,13 @@ VENTANA MODAL FULLCALENDAR
        },
 
 
+
+
+/* ELIMINAR EVENTOS DEL CALENDIARIO */
+
         eventClick: function(event) {
 
-            var decision = confirm("Está seguro de eliminar este evento?");
+            var decision = confirm("Está seguro de eliminar esta cita?");
 
             if (decision) {
 
@@ -3021,6 +3077,11 @@ VENTANA MODAL FULLCALENDAR
                 });
             }
         },
+
+
+
+
+/* ACTIAULIZAR EVENTOS DE CALENDARIO */
 
         eventResize: function(event) {
 
@@ -3041,6 +3102,8 @@ VENTANA MODAL FULLCALENDAR
     });
 
 });
+
+
   
 </script>
 

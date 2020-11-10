@@ -4,7 +4,6 @@
 require_once('../../../modelos/conexion.php');
 
 
-
 //echo $_POST['title'];
 if (isset($_POST['fecha']) &&  isset($_POST['cliente']) && isset($_POST['mascota']) && isset($_POST['especie'])  && isset($_POST['telefono']) && isset($_POST['CboMedico'])   && isset($_POST['title']) && isset($_POST['descripcion'])  && isset($_POST['color'])  && isset($_POST['start']) && isset($_POST['end'])  && isset($_POST['hora_ini']) && isset($_POST['hora_fin']) ){
 	
